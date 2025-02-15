@@ -7,6 +7,7 @@ import Shop from "./pages/ShopPage/Shop";
 import Item from "./pages/ShopPage/Item/Item";
 import Cart from "./pages/CartPage/Cart";
 import Orders from "./pages/OrderPage/Orders";
+import NotFound from "./components/NotFound";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/shop/:id" element={<Item />} />
         <Route path="/shop/cart" element={<Cart />} />
         <Route path="/orders" element={<Orders />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
