@@ -9,16 +9,16 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/card";
-import { AspectRatio } from "../ui/aspect-ratio";
-import { Button } from "../ui/button";
+} from "@/components/ui/card";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Button } from "@/components//ui/button";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "../ui/carousel";
+} from "@/components/ui/carousel";
 import PopularPicksSkeleton from "./PopularPicksSkeleton";
 import { ProductProps } from "@/lib/types";
 

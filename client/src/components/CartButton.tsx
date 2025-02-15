@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { IoCart } from "react-icons/io5";
 
-import { Button } from "../ui/button";
+import { Button } from "./ui/button";
 
 const CartButton = () => {
   return (

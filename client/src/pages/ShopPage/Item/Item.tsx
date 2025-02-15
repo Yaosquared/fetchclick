@@ -1,5 +1,6 @@
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { FaPlus } from "react-icons/fa";
 
@@ -13,40 +14,28 @@ import {
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
 import ItemSkeleton from "./ItemSkeleton";
-
-interface ProductCardProps {
-  availabilityStatus: string;
-  brand: string;
-  category: string;
-  description: string;
-  dimensions: { width: number; height: number; depth: number };
-  id: number;
-  images: string[];
-  price: number;
-  rating: number;
-  returnPolicy: number;
-  reviews: ReviewsProps[];
-  shippingInformation: string;
-  stock: number;
-  thumbnail: string;
-  title: string;
-  warrantyInformation: string;
-  weight: number;
-}
-
-interface ReviewsProps {
-  rating: number;
-  comment: string;
-  date: string;
-  reviewerName: string;
-  reviewerEmail: string;
-}
+import { ProductProps } from "@/lib/types";
 
 const Item = () => {
   const params = useParams();
   const id = params.id;
-  const [product, setProduct] = useState<ProductCardProps | null>(null);
+  const [product, setProduct] = useState<ProductProps | null>(null);
   const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
+
+  const addProduct = async () => {
+    await axios
+      .post(`${import.meta.env.VITE_SERVER_URL}/api/cart`, product)
+      .then(() => {
+        console.log("Product added in cart successfully");
+        navigate("/shop");
+      })
+
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -124,10 +113,12 @@ const Item = () => {
                   </div>
                   <p className="font-medium">${product.price}</p>
                   <p>Stock/s Left: {product.stock}</p>
-                  <Button className="cursor-pointer">
-                    <FaPlus />
-                    <span>Add to cart</span>
-                  </Button>
+                  <form action={addProduct}>
+                    <Button type="submit" className="cursor-pointer">
+                      <FaPlus />
+                      <span>Add to cart</span>
+                    </Button>
+                  </form>
                 </div>
               </div>
             </div>
@@ -139,12 +130,12 @@ const Item = () => {
                 <li>Brand: {product.brand}</li>
                 <li>
                   Product Dimensions:
-                  <ul className="list-disc ml-8">
-                    <li>Width: {product.dimensions.width}</li>
-                    <li>Height: {product.dimensions.height}</li>
-                    <li>Depth: {product.dimensions.depth}</li>
-                  </ul>
-                  <li>Weight: {product.weight}kg</li>
+                  <div className="list-disc ml-8">
+                    <div>Width: {product.dimensions.width}</div>
+                    <div>Height: {product.dimensions.height}</div>
+                    <div>Depth: {product.dimensions.depth}</div>
+                  </div>
+                  <div>Weight: {product.weight}kg</div>
                 </li>
                 <li>Shipping: {product.shippingInformation}</li>
                 <li>Return Policy: {product.returnPolicy}</li>
@@ -187,29 +178,3 @@ const Item = () => {
 };
 
 export default Item;
-
-{
-  /* <Dialog>
-  <DialogTrigger className="w-full">
-    <Button className="w-full cursor-pointer">See more...</Button>
-  </DialogTrigger>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>
-        <div>{product.title}</div>
-        <div className="font-normal text-base text-muted-foreground">
-          ${product.price}
-        </div>
-      </DialogTitle>
-      <DialogDescription>
-        <ProductCarousel images={product.images} />
-        <div>
-          <h2 className="font-semibold text-base text-black">Description</h2>
-          <p className="pb-4">{product.description}</p>
-          <Button className="w-full cursor-pointer">Add to cart</Button>
-        </div>
-      </DialogDescription>
-    </DialogHeader>
-  </DialogContent>
-</Dialog>; */
-}

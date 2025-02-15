@@ -1,11 +1,12 @@
 import { Route, Routes } from "react-router";
-import CartButton from "./components/CartPage/CartButton";
+
 import Navbar from "./components/Navbar";
-import Shop from "./components/ShopPage/Shop";
-import Cart from "./components/CartPage/Cart";
-import Item from "./components/ShopPage/Item/Item";
-import Home from "./components/HomePage/Home";
-import Orders from "./components/Orders";
+import CartButton from "./components/CartButton";
+import Home from "./pages/HomePage/Home";
+import Shop from "./pages/ShopPage/Shop";
+import Item from "./pages/ShopPage/Item/Item";
+import Cart from "./pages/CartPage/Cart";
+import Orders from "./pages/OrderPage/Orders";
 
 const App = () => {
   return (

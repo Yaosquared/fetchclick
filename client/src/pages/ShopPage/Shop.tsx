@@ -4,8 +4,8 @@ import axios from "axios";
 import Tools from "./Tools";
 import ProductCard from "./ProductCard";
 import ProductPagination from "./ProductPagination";
-import CartButton from "../CartPage/CartButton";
-import Footer from "../Footer";
+import CartButton from "../../components/CartButton";
+import Footer from "../../components/Footer";
 import { ProductProps } from "@/lib/types";
 
 const Shop = () => {

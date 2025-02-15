@@ -3,7 +3,6 @@ import { useSearchParams } from "react-router-dom";
 import {
   Pagination,
   PaginationContent,
-  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
   PaginationNext,
@@ -48,9 +47,7 @@ const ProductPagination = ({ totalProducts }: { totalProducts: number }) => {
           <PaginationItem>
             <PaginationLink>{currentPage}</PaginationLink>
           </PaginationItem>
-          <PaginationItem>
-            <PaginationEllipsis />
-          </PaginationItem>
+
           <PaginationItem>
             <PaginationNext
               onClick={handleNextPage}
