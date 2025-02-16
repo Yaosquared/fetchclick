@@ -7,8 +7,9 @@ import { Button } from "@/components/ui/button";
 const Navbar = () => {
   return (
     <div className="w-full flex justify-evenly items-center px-10 py-3 bg-primary">
-      <Link to={"/"}>
-        <h2 className="font-semibold text-lg text-white">FetchClick</h2>
+      <Link to={"/"} className="flex items-center gap-2">
+        <img src="public/logo.svg" alt="FetchClick Logo" className="h-8 w-8" />
+        <h2 className="font-semibold text-xl text-white">FetchClick</h2>
       </Link>
 
       <ul className="flex space-x-8">

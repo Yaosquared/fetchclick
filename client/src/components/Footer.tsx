@@ -13,7 +13,7 @@ const Footer = () => {
       <Separator />
       <Link to={"https://yaosquared-portfolio.vercel.app/"} target="_blank">
         <img
-          src="client/src/assets/icon.ico"
+          src="src/assets/icon.ico"
           alt="Yaosquared's Logo"
           title="Go to Yaosquared's Portfolio"
           className="mt-2 w-14 h-14 cursor-pointer"
