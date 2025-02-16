@@ -11,10 +11,8 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8000;
 const corsOptions = {
-  origin: [`${process.env.CLIENT_URL}`],
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  preflightContinue: false,
+  origin: `${process.env.CLIENT_URL}`,
+  optionsSuccessStatus: 200,
 };
 
 app.use(express.json());

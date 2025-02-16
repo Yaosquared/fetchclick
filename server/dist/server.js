@@ -13,7 +13,8 @@ dotenv_1.default.config();
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 8000;
 const corsOptions = {
-    origin: ["http://localhost:5173"],
+    origin: `${process.env.CLIENT_URL}`,
+    credentials: true,
 };
 app.use(express_1.default.json());
 app.use((0, cors_1.default)(corsOptions));

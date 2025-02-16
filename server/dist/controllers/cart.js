@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteCartOrder = exports.updateCartOrder = exports.createCartOrder = exports.getCartSummary = void 0;
+exports.clearCart = exports.deleteCart = exports.updateCart = exports.createCart = exports.getCartSummary = void 0;
 const cart_1 = __importDefault(require("../models/cart"));
 const getCartSummary = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -20,27 +20,25 @@ const getCartSummary = (req, res) => __awaiter(void 0, void 0, void 0, function*
         res.status(200).json({ success: true, data: cart });
     }
     catch (error) {
-        console.log("Error in fetching products:", error.message);
+        console.log("Error in fetching cart summary:", error.message);
         res.status(500).json({ success: false, message: "Server Error" });
     }
 });
 exports.getCartSummary = getCartSummary;
-const createCartOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log("reached!");
-    const order = req.body;
-    console.log(order);
-    const newOrder = new cart_1.default(order);
+const createCart = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const cart = req.body;
+    const newCart = new cart_1.default(cart);
     try {
-        yield newOrder.save();
-        res.status(201).json({ success: true, data: newOrder });
+        yield newCart.save();
+        res.status(201).json({ success: true, data: newCart });
     }
     catch (error) {
-        console.error("Error in creating product", error.message);
+        console.error("Error in creating cart:", error.message);
         res.status(500).json({ success: false, message: "Server Error" });
     }
 });
-exports.createCartOrder = createCartOrder;
-const updateCartOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.createCart = createCart;
+const updateCart = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     const { quantity } = req.body;
     try {
@@ -52,20 +50,31 @@ const updateCartOrder = (req, res) => __awaiter(void 0, void 0, void 0, function
         res.status(200).json({ success: true, data: updatedProduct });
     }
     catch (error) {
-        console.error("Error in updating product", error.message);
+        console.error("Error in updating cart:", error.message);
         res.status(500).json({ success: false, message: "Server Error" });
     }
 });
-exports.updateCartOrder = updateCartOrder;
-const deleteCartOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.updateCart = updateCart;
+const deleteCart = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
     try {
         yield cart_1.default.findByIdAndDelete(id);
         res.status(200).json({ success: true, message: "Product deleted" });
     }
     catch (error) {
-        console.error("Error in deleting product", error.message);
+        console.error("Error in deleting cart:", error.message);
         res.status(500).json({ success: false, message: "Server Error" });
     }
 });
-exports.deleteCartOrder = deleteCartOrder;
+exports.deleteCart = deleteCart;
+const clearCart = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        yield cart_1.default.deleteMany();
+        res.status(200).json({ success: true, message: "Cart content deleted" });
+    }
+    catch (error) {
+        console.error("Error in deleting cart summary:", error.message);
+        res.status(500).json({ success: false, message: "Server Error" });
+    }
+});
+exports.clearCart = clearCart;

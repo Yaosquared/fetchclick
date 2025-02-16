@@ -7,5 +7,6 @@ const express_1 = __importDefault(require("express"));
 const order_1 = require("../controllers/order");
 const router = express_1.default.Router();
 router.get("/", order_1.getOrders);
-// router.put("/:id", updateCartOrder);
+router.post("/", order_1.createOrder);
+router.put("/:id", order_1.updateOrder);
 exports.default = router;

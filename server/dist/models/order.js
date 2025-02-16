@@ -4,26 +4,54 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
+// const productSchema = new mongoose.Schema({
+//   productId: {
+//     type: String,
+//     required: true,
+//   },
+//   title: {
+//     type: String,
+//     required: true,
+//   },
+//   quantity: {
+//     type: Number,
+//     required: true,
+//   },
+//   deliveryFee: {
+//     type: Number,
+//     required: true,
+//   },
+//   price: {
+//     type: Number,
+//     required: true,
+//   },
+// });
 const orderSchema = new mongoose_1.default.Schema({
-    title: {
-        type: String,
-        required: true,
-    },
-    quantity: {
-        type: Number,
-        required: false,
-        default: 1,
-    },
-    deliveryFee: {
-        type: Number,
-        required: false,
-        default: 3,
-    },
-    price: {
-        type: Number,
-        required: true,
-    },
-    isCompleted: {
+    cart: [
+        {
+            id: {
+                type: String,
+                required: true,
+            },
+            title: {
+                type: String,
+                required: true,
+            },
+            quantity: {
+                type: Number,
+                required: true,
+            },
+            deliveryFee: {
+                type: Number,
+                required: true,
+            },
+            price: {
+                type: Number,
+                required: true,
+            },
+        },
+    ],
+    status: {
         type: Boolean,
         required: false,
         default: false,

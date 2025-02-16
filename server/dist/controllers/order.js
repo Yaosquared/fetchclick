@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getOrders = void 0;
+exports.updateOrder = exports.createOrder = exports.getOrders = void 0;
 const order_1 = __importDefault(require("../models/order"));
 const getOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -20,27 +20,38 @@ const getOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         res.status(200).json({ success: true, data: order });
     }
     catch (error) {
-        console.log("Error in fetching products:", error.message);
+        console.log("Error in fetching orders summary:", error.message);
         res.status(500).json({ success: false, message: "Server Error" });
     }
 });
 exports.getOrders = getOrders;
-// export const updateCartOrder = async (req: Request, res: Response) => {
-//   const { id } = req.params;
-//   const { quantity } = req.body;
-//   try {
-//     const updatedProduct = await Order.findByIdAndUpdate(
-//       id,
-//       {
-//         $set: { quantity },
-//       },
-//       {
-//         new: true,
-//       }
-//     );
-//     res.status(200).json({ success: true, data: updatedProduct });
-//   } catch (error: any) {
-//     console.error("Error in updating product", error.message);
-//     res.status(500).json({ success: false, message: "Server Error" });
-//   }
-// };
+const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const cart = req.body;
+    const newOrder = new order_1.default({ cart });
+    try {
+        yield newOrder.save();
+        res.status(201).json({ success: true, data: newOrder });
+    }
+    catch (error) {
+        console.error("Error in creating order:", error.message);
+        res.status(500).json({ success: false, message: "Server Error" });
+    }
+});
+exports.createOrder = createOrder;
+const updateOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const { status } = req.body;
+    try {
+        const updatedProduct = yield order_1.default.findByIdAndUpdate(id, {
+            $set: { status },
+        }, {
+            new: true,
+        });
+        res.status(200).json({ success: true, data: updatedProduct });
+    }
+    catch (error) {
+        console.error("Error in updating product", error.message);
+        res.status(500).json({ success: false, message: "Server Error" });
+    }
+});
+exports.updateOrder = updateOrder;

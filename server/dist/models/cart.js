@@ -145,36 +145,8 @@ const cartSchema = new mongoose_1.default.Schema({
     deliveryFee: {
         type: Number,
         required: true,
-        default: 3,
+        default: () => (Math.random() * 2 + 1).toFixed(2),
     },
-    // title: {
-    //   type: String,
-    //   required: true,
-    // },
-    // category: {
-    //   type: String,
-    //   required: true,
-    // },
-    // quantity: {
-    //   type: Number,
-    //   required: true,
-    // },
-    // price: {
-    //   type: Number,
-    //   required: true,
-    // },
-    // thumbnail: {
-    //   type: String,
-    //   required: true,
-    // },
-    // deliveryFee: {
-    //   type: Number,
-    //   required: true,
-    // },
-    // total: {
-    //   type: Number,
-    //   required: true,
-    // },
 }, {
     timestamps: true,
 });
