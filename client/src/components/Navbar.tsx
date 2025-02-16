@@ -3,12 +3,13 @@ import { MdPerson } from "react-icons/md";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import logo from "../assets/logo.svg";
 
 const Navbar = () => {
   return (
     <div className="w-full flex justify-evenly items-center px-10 py-3 bg-primary">
       <Link to={"/"} className="flex items-center gap-2">
-        <img src="public/logo.svg" alt="FetchClick Logo" className="h-8 w-8" />
+        <img src={logo} alt="FetchClick Logo" className="h-8 w-8" />
         <h2 className="font-semibold text-xl text-white">FetchClick</h2>
       </Link>
 
